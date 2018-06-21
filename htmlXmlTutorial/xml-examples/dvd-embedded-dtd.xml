@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE library [
+<!ELEMENT library (dvd+)>
+<!ELEMENT dvd (title, format, genre)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT format (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ATTLIST dvd id CDATA #REQUIRED>
+]>
+<library>
+  <dvd id="1">
+	 <title>Gone with the Wind</title>
+	 <format>Movie</format>
+	 <genre>Classic</genre>
+  </dvd>
+  <dvd id="2">
+	 <title>Star Trek</title>
+	 <format>TV Series</format>
+	 <genre>Science fiction</genre>
+  </dvd>
+</library>

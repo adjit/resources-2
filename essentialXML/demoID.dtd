@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT musicLib (cd|tape|cdLib|tapeLib)*>
+<!ELEMENT cd (#PCDATA)>
+<!ELEMENT tape (#PCDATA)>
+<!ATTLIST cd cdID  ID #REQUIRED>
+<!ATTLIST tape tapeID ID #REQUIRED>
+<!ELEMENT cdLib EMPTY>
+<!ATTLIST cdLib cds IDREFS #REQUIRED>
+<!ELEMENT tapeLib EMPTY>
+<!ATTLIST tapeLib tapes IDREFS #REQUIRED>

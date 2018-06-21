@@ -1,0 +1,32 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <xsd:element name="musicLib">
+  <xsd:complexType>
+   <xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref="cd"/>
+    <xsd:element ref="tape"/>
+    <xsd:element ref="cdLib"/>
+    <xsd:element ref="tapeLib"/>
+   </xsd:choice> 	
+  </xsd:complexType>
+ </xsd:element>
+ <xsd:element name="cd">
+  <xsd:complexType mixed="true">
+   <xsd:attribute name="cdID" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+ </xsd:element>  	
+ <xsd:element name="tape">
+  <xsd:complexType mixed="true">
+   <xsd:attribute name="tapeID" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+ </xsd:element> 
+ <xsd:element name="cdLib">
+  <xsd:complexType>
+   <xsd:attribute name="cds" type="xsd:IDREFS" use="required"/>
+  </xsd:complexType>
+ </xsd:element> 
+ <xsd:element name="tapeLib">
+  <xsd:complexType>
+   <xsd:attribute name="tapes" type="xsd:IDREFS" use="required"/>
+  </xsd:complexType>
+ </xsd:element> 
+</xsd:schema>

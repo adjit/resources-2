@@ -1,0 +1,147 @@
+// (C) Prof. Lixin Tao, Pace University, September 2003
+
+// A simplified Tabu Search algorithm implementation for graph bisection
+public class TabuSearch {
+
+  private int vertexNumber;                   // Vertex number of the current graph
+  private int halfVertexNumber;               // vertexNumber/2
+  private int adj[][];                        // Adjacency matrix of the current graph
+  private Utilities u;                        // Utilities object 
+  private int left[];                         // Generic array for vertices of the left partition
+  private int right[];                        // Generic array for vertices of the right partition
+  private int neighbor[];                     // Generic array for a neighbor of p[]
+  
+  // Use tabu search to find and return the smallest cut size
+  // Return the best partition through bestPartition[]
+  // Utilities object u is shared by all algorithms
+  public int run(int bestPartition[], Utilities u) {
+    this.u = u;
+    vertexNumber = u.getVertexNumber();       // Retrieve vertex number in the graph
+    halfVertexNumber = vertexNumber/2;
+    adj = u.getAdjacencyMatrix();             // Retrieve the graph adjacency matrix
+    int p[] = new int[vertexNumber];          // Allocate space for current partition
+    neighbor = new int[vertexNumber];         // Allocate space for a neighbor of p[]
+    left = new int[halfVertexNumber];         // Generic array for vertices of the left partition
+    right = new int[halfVertexNumber];        // Generic array for vertices of the right partition
+
+    u.randomPartition(p);                     // Generate random initial solution
+    int currentCost = u.cutSize(p);           // Find out its cost
+    int bestCost = currentCost;               // p[] is the best partition seen so far
+    u.copyArray(p, bestPartition);            // Record it
+    // Create a tabu list recording the most recently moved 10 vertices
+    // 10 is a parameter for adjustment
+    TabuList t = new TabuList(10);
+    // Stop if there are no improvement for 50 consecutive iterations
+    // 50 is a parameter for adjustment
+    for (int i = 0; i < 50; i++) {
+      currentCost = bestQualifiedNeighbor(p, t, currentCost);
+      // If the new solution is the best seen so far, record it
+      if (currentCost < bestCost) {  
+        bestCost = currentCost;
+        u.copyArray(p, bestPartition);
+        // Renew another 20 iterations before considering to quit
+        i = 0;
+      }
+    }
+    return bestCost;
+  }
+
+  // Find the best neighbor that is not tabued, return its cut size as return value,
+  // return it through p[]
+  // TabuList t lists recently moved vertices that should be prohibited in moving now
+  // currentCost is the cut size of p
+  private int bestQualifiedNeighbor(int p[], TabuList t, int currentCost) {
+    int leftIndex = 0;       // Index for the first insertion box of left[]
+    int rightIndex = 0;      // Index for the first insertion box of right[]
+    int bestCost = Integer.MAX_VALUE;   // Best cut size seen so far; make sure it will be updated
+    int bestLeftVertex = 0;  // Swapping bestLeftVertex and bestRightVertex on p[] produces the 
+    int bestRightVertex = 0; // best neighbor partition seen so far; initialized with dummy value 0
+    for (int i = 0; i < vertexNumber; i++) {
+      if (p[i] == 0)
+        left[leftIndex++] = i;    // Load left[] with all vertices in the left partition of p[]
+      else
+        right[rightIndex++] = i;  // Load right[] with all vertices in the right partition of p[]
+    }
+    // Try all vertex swaps across the partition p[] that are not tabued, and return the best
+    // neighbor partition in p[] and its cost as return value
+    for (int i = 0; i < halfVertexNumber; i++) {
+      int leftVertex = left[i];
+      if (t.isTabued(leftVertex))          // If leftVertex is on the tabu list, skip it
+        continue;
+      for (int j = 0; j < halfVertexNumber; j++) {
+        int rightVertex = right[j];
+        if (t.isTabued(j))                 // If rightVertex is on the tabu list, skip it
+            continue;
+        // Evaluate the cut size resulting from swapping leftVertex and rightVertex
+        int cost = cutSize(p, leftVertex, rightVertex);
+        if (cost < bestCost) {
+          bestCost = cost;
+          bestLeftVertex = leftVertex;
+          bestRightVertex = rightVertex;
+        }
+      }
+    }
+    t.insert(bestLeftVertex);                   // bestLeftVertex is now tabued
+    t.insert(bestRightVertex);                  // bestRightVertex is now tabued
+    u.swap(p, bestLeftVertex, bestRightVertex); // Carry out the best swap in p[]
+    return bestCost;
+  }
+
+  // Evaluate the cut size resulting from swapping leftVertex and rightVertex on p[]
+  private int cutSize(int p[], int leftVertex, int rightVertex) {
+    u.copyArray(p, neighbor);
+    u.swap(neighbor, leftVertex, rightVertex);  // neighbor[] is now a neighbor of p[]
+    return u.cutSize(neighbor);
+  }
+
+  // main() is only used when you run "java TabuSearch [file name]"
+  public static void main(String args[]) {
+    Utilities u = new Utilities();                    // Create a Utilities object
+    String fileName = "graph10.txt";                  // Default data file name
+    if (args.length == 1)
+      fileName = args[0];                             // Use command-line file name
+    u.readGraph(fileName);
+    //u.printGraph();                                 // Print out the parsed graph data
+    int bestPartition[] = new int[u.getVertexNumber()]; // Allocate space for best partition
+    TabuSearch ts = new TabuSearch();
+    u.startRun();                                     // Mark the start of run
+    int bestCost = ts.run(bestPartition, u);          // Run Tabu Search
+    u.endRun();                                       // Mark the end of run
+    // Print out results
+    u.reportResult("Tabu search", bestCost, bestPartition); 
+    // Append results in file costs.txt
+    u.appendBestPartition("Tabu search", bestCost, bestPartition);        
+  }
+}
+
+// Tabu list implementation as a circular array
+class TabuList {
+  private int tabuListSize;              // Tabu list size
+  private int tabuList[];                // List of tabued vertices
+  private int next;                      // Index for the next box for insertion
+
+  public TabuList(int size) {
+    tabuListSize = size;
+    tabuList = new int [tabuListSize];   // Allocate space for tabu list
+    for (int i = 0; i < tabuListSize; i++)
+      tabuList[i] = -1;                  // Initialize the list with illegal vertex value:
+                                         // no vertex is tabued now
+    next = 0;
+  }
+
+  // Return true iff vertex is on the tabu list
+  public boolean isTabued(int vertex) {
+    for (int i = 0; i < tabuListSize; i++)
+      if (tabuList[i] == vertex)
+        return true;
+    return false;
+  }
+
+  // Insert vertex into the tabu list
+  public void insert(int vertex) {
+    tabuList[next] = vertex;        // Insert vertex at position next
+    next++;                         // Increase value of next circularly: 
+    if (next == tabuListSize)       // 0, 1, 2, ..., tabuListSize-1, 0, 1, ...
+      next = 0;
+  }
+}

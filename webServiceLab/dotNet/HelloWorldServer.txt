@@ -1,0 +1,8 @@
+[WebService(Namespace="http://csis.pace.edu/")]
+
+----------------------------------------------------------
+    [WebMethod]
+    public string Hello(string name)
+    {
+      return "Hello World, " + name + "!";
+    }

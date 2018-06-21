@@ -1,0 +1,6 @@
+grant codeBase "file:///home/user/JavaSecurityLab/" {
+  permission java.util.PropertyPermission "user.home", "read";
+  permission java.util.PropertyPermission "java.home", "read";
+  permission java.util.PropertyPermission "java.ext.dirs", "read";
+};
+

@@ -1,0 +1,1 @@
+java  org.apache.axis.wsdl.WSDL2Java  http://localhost:8080/axis/SquareIntegerServer.jws?wsdl

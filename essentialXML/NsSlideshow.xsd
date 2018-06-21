@@ -1,0 +1,115 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://dps.csis.pace.edu"
+  xmlns="http://dps.csis.pace.edu"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified" >
+
+ <xsd:element name="slideshow">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="slide" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="title" type="xsd:string" use="required"/>
+   <xsd:attribute name="date" type="xsd:string" use="optional"/>
+   <xsd:attribute name="author" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="slide">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="slide-title" minOccurs="0" maxOccurs="1"/>
+    <xsd:element ref="item" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="type" use="optional">
+    <xsd:simpleType>
+     <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="tech"/>
+      <xsd:enumeration value="exec"/>
+      <xsd:enumeration value="all"/>
+     </xsd:restriction>
+    </xsd:simpleType>
+   </xsd:attribute>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="em">
+  <xsd:complexType mixed="true">
+   <xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref="em"/>
+    <xsd:element ref="link"/>
+    <xsd:element ref="b"/>
+    <xsd:element ref="br"/>
+   </xsd:choice>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="link">
+  <xsd:complexType mixed="true">
+   <xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref="b"/>
+    <xsd:element ref="em"/>
+   </xsd:choice>
+   <xsd:attribute name="target" type="xsd:string" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="b">
+  <xsd:complexType mixed="true">
+   <xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref="link"/>
+    <xsd:element ref="em"/>
+    <xsd:element ref="br"/>
+   </xsd:choice>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="br">
+  <xsd:complexType/>
+ </xsd:element>
+
+ <xsd:element name="diagram">
+  <xsd:complexType mixed="true">
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="slide-title">
+  <xsd:complexType mixed="true">
+   <xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref="em"/>
+    <xsd:element ref="link"/>
+    <xsd:element ref="b"/>
+    <xsd:element ref="br"/>
+   </xsd:choice>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="item">
+  <xsd:complexType mixed="true">
+   <xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref="em"/>
+    <xsd:element ref="link"/>
+    <xsd:element ref="b"/>
+    <xsd:element ref="br"/>
+    <xsd:element ref="list"/>
+    <xsd:element ref="diagram"/>
+   </xsd:choice>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name="list">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="item" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="type" use="optional" default="ordered">
+    <xsd:simpleType>
+     <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ordered"/>
+      <xsd:enumeration value="unordered"/>
+     </xsd:restriction>
+    </xsd:simpleType>
+   </xsd:attribute>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

@@ -1,0 +1,1 @@
+java  org.apache.axis.wsdl.WSDL2Java  http://localhost/hello/Service.asmx?WSDL

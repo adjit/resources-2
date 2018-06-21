@@ -1,0 +1,60 @@
+
+                How to Run the Sample Heuristic Implementations
+
+                                Dr. Lixin Tao
+                    
+                               October 10, 2003
+
+Before you can compile and run my java implementations, you must install a J2SE full 
+version on you PC, and put its bin directory on your PATH.
+
+Assume you installed your version of J2SE in c:\j2se1.4. You can use Start|Run|cmd to 
+launch a terminal window, and type 
+
+    set PATH=c:\j2se1.4\bin;%PATH%
+
+to set up your PATH. 
+
+Download my file graphBisection.zip from URL 
+
+    http://csis.pace.edu/~lixin/dps/
+
+and unzip the file on your hard disk. Inside a terminal window, you change directory to 
+the directory containing my Java source code.
+
+To compile the source files, type 
+
+    javac  GenData.java
+    javac  PartGraph.java
+
+To generate a new problem instance with 20 vertices into a file named graph20.txt, type
+
+    java  GenData  20  graph20.txt
+
+To run all heuristics on the same problem instance file graph20.txt, type
+
+    java  PartGraph  graph20.txt
+
+To run Exhaustive Search only on problem instance file graph20.txt, type
+
+    java  ExhaustiveSearch  graph20.txt
+
+To run Hill Climbing (local optimization) only on problem instance file graph20.txt, type
+
+    java  HillClimbing  graph20.txt
+
+To run Repeated Random only on problem instance file graph20.txt, type
+
+    java  RepeatedRandom  graph20.txt
+
+To run Simulated Annealing only on problem instance file graph20.txt, type
+
+    java  SimulatedAnnealing graph20.txt
+
+To run Tabu Search only on problem instance file graph20.txt, type
+
+    java  TabuSearch  graph20.txt
+
+To run Genetic Algorithm only on problem instance file graph20.txt, type
+
+    java  GeneticAlgorithm  graph20.txt

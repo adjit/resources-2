@@ -1,0 +1,73 @@
+<html>
+<body>
+<h1 align="center">Slides on Java Multithreading</h1>
+<h3 align="center">
+<em>Lixin Tao</em>
+</h3>
+<h3 align="center">February 1, 2005</h3>
+<hr>
+<p align="center">
+<b>Overview</b>
+</p>
+<p align="center"> (all) </p>
+<ul>
+<li>Why <em>Multithreading</em> is great</li>
+<li>
+<em>Windows</em> and <em>Unix</em> support multithreads</li>
+<li>
+<em>Java</em> supports multithread programming</li>
+<li>For more information, please visit 
+            <a href="http://java.sun.com">Java Home</a> and 
+            <br> 
+<a href="http://www.boarland.com">http://www.boarland.com</a>
+      
+</li>
+</ul>
+<hr>
+<p align="center">
+<b>Why Multithreading is Important?</b>
+</p>
+<p align="center"> (exec) </p>
+<ul>
+<li>CPU switching among threads is more efficient
+      	<ol>
+      	  
+<li>Process generation is slow</li>      	  
+      	  
+<li>Process context switching is slow</li>
+      	  
+<li>Thread is also called light process</li>
+      	
+</ol>
+      
+</li>
+<li>Serving multiple clients concurrently</li>
+<li>More reponsive user interface</li>
+</ul>
+<hr>
+<p align="center">
+<b>How does it Work</b>
+</p>
+<p align="center"> (tech) </p>
+<ul>
+<li>All threads can run concurrently</li>
+<li>CPU number &lt; thread number</li>
+<li>Thread synchronization</li>
+<li>
+<pre>Thread State Diagram:
+           
+                          start          [finish]
+             (New thread) -------&gt; (Run) --------&gt; (terminated)    
+                                   / | \
+                         _________/  |  \_________
+                        |            |            |
+                   wait |        time|out         | [CPU available]
+                        |            \/           |
+                    (blocked)----&gt;(Ready)---------&gt;
+                                     
+      </pre>
+</li>
+</ul>
+<hr>
+</body>
+</html>

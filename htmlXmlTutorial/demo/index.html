@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Test Site of Web Applications</title>
+</head>
+<body>
+<h2 align="center"><em>Test Site of Web Applications</em></h2>
+
+<p>This is a test site for Web applications. It supports student learning of HTML, HTTP, HTML form data submission, JSP and Servlets. Its <em>echo</em> servlet can be used as data submission target for any HTML form and it will echo back all information about the form data submission including parameters, header lines, and cookies.</p>
+
+<p>The following is a form for submitting a name, a value, and a number of seconds. It will set a cookie of (name, value) on your computer and the cookie will be alive for the number of seconds that you specified. To test the cookie mechanism, specify the following three values and submit them for setting a cookie on this computer and reviewing the submitted values; and click on the Web browser's <em>Back</em> icon to get back to this page. Repeat this process to set cookies with different names. Set name and value to be blank for avoiding setting new cookies. You will notice at the bottom of the Web page for submitted data that all alive cookies are sent back to the Web server every time you submit data to this Web server.</p>
+
+<form action="echo" method="post">
+<table width="80%">
+<tr>
+<td width=20%>Cookie Name:</td>
+<td width=80%><input type="text" name="cookie_name" value="name1" ></td>
+</tr>
+<tr>
+<td width=20%>Cookie Value:</td>
+<td width=80%><input type="text" name="cookie_value" value="value1"></td>
+</tr>
+<tr>
+<td width=20%>Cookie Life:</td>
+<td width=80%><input type="text" name="cookie_time" value="50" size="2" > seconds</td>
+</tr>
+</table>
+<p><input type="submit" name="Submit" value="Submit">
+<input type="reset" value="Reset"></p>
+</form>
+<p/>
+&copy Prof. Lixin Tao, Pace University, 2007
+</body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+  <wsdl:definitions 
+    targetNamespace="http://localhost:8080/axis/SquareIntegerServer.jws"    
+    xmlns:apachesoap="http://xml.apache.org/xml-soap" 
+    xmlns:impl="http://localhost:8080/axis/SquareIntegerServer.jws" 
+    xmlns:intf="http://localhost:8080/axis/SquareIntegerServer.jws" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  >
+
+  <wsdl:message name="squareResponse">
+    <wsdl:part name="squareReturn" type="xsd:int" /> 
+  </wsdl:message>
+
+  <wsdl:message name="squareRequest">
+    <wsdl:part name="x" type="xsd:int" /> 
+  </wsdl:message>
+
+  <wsdl:portType name="SquareIntegerServer">
+    <wsdl:operation name="square" parameterOrder="x">
+      <wsdl:input message="impl:squareRequest" name="squareRequest" /> 
+      <wsdl:output message="impl:squareResponse" name="squareResponse" /> 
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="SquareIntegerServerSoapBinding" type="impl:SquareIntegerServer">
+    <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" /> 
+    <wsdl:operation name="square">
+      <wsdlsoap:operation soapAction="" /> 
+      <wsdl:input name="squareRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"    
+                       namespace="http://DefaultNamespace" use="encoded" /> 
+      </wsdl:input>
+      <wsdl:output name="squareResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"                     
+                       namespace="http://localhost:8080/axis/SquareIntegerServer.jws" 
+                       use="encoded" /> 
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SquareIntegerServerService">
+    <wsdl:port binding="impl:SquareIntegerServerSoapBinding" name="SquareIntegerServer">
+    <wsdlsoap:address location="http://localhost:8080/axis/SquareIntegerServer.jws" /> 
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

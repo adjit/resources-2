@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<musicLib>
+  <cd cdID="c1">CD title 1</cd>
+  <cd cdID="c2">CD title 1</cd>
+  <tape tapeID="t1">CD title 1</tape>
+  <tape tapeID="t2">CD title 1</tape>
+  <cdLib cds="c1 c2"/>
+  <tapeLib tapes="t1 t2 c1 c2"/>
+</musicLib>

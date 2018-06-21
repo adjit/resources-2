@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  A SAMPLE set of slides  -->
+<!DOCTYPE slideshow SYSTEM "slideshow.dtd">
+
+<slideshow 
+		title="Slides on Java Multithreading"
+		date="February 1, 2005"
+		author="Lixin Tao"
+		>
+		
+    <!-- PROCESSING INSTRUCTION -->
+    <?my.presentation.Program QUERY="exec, tech, all"?>
+
+    <slide type="all">
+      <slide-title>Overview</slide-title>
+      <item>Why <em>Multithreading</em> is great</item>
+      <item><em>Windows</em> and <em>Unix</em> support multithreads</item>
+      <item><em>Java</em> supports multithread programming</item>
+      <item>For more information, please visit 
+            <link target="http://java.sun.com"><b>Java</b> Home</link> and 
+            <br/> <link target="http://www.boarland.com"/>
+      </item>
+    </slide>
+
+    <slide type="exec">
+      <slide-title>Why Multithreading is Important?</slide-title>
+      <item>CPU switching among threads is more efficient
+      	<list type="ordered">
+      	  <item>Process generation is slow</item>      	  
+      	  <item>Process context switching is slow</item>
+      	  <item>Thread is also called light process</item>
+      	</list>
+      </item>
+      <item>Serving multiple clients concurrently</item>
+      <item>More reponsive user interface</item>
+    </slide>
+
+    <slide type="tech">
+      <slide-title>How does it Work</slide-title>
+      <item>All threads can run concurrently</item>
+      <item>CPU number &lt; thread number</item>
+      <item>Thread synchronization</item>
+      <item><diagram><![CDATA[Thread State Diagram:
+           
+                          start          [finish]
+             (New thread) -------> (Run) --------> (terminated)    
+                                   / | \
+                         _________/  |  \_________
+                        |            |            |
+                   wait |        time|out         | [CPU available]
+                        |            \/           |
+                    (blocked)---->(Ready)--------->
+                                     
+      ]]></diagram></item>
+    </slide>
+</slideshow>
+

@@ -1,0 +1,7 @@
+    protected void SayButton_Click(object sender, EventArgs e)
+    {
+        localhost.Service proxy = new localhost.Service();
+        string name = NameTextBox.Text;
+        string message = proxy.Hello(name);
+        MessageLabel.Text = message;
+    }

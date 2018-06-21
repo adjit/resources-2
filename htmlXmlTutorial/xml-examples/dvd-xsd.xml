@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This XML document describes a DVD library -->
+<library xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="dvd.xsd">
+	<dvd id="1">
+		<title>Gone with the Wind</title>
+		<format>Movie</format>
+		<genre>Classic</genre>
+	</dvd>
+	<dvd id="2">
+		<title>Star Trek</title><br/>
+		<format>TV Series</format>
+		<genre>Science fiction</genre>
+	</dvd>
+</library>

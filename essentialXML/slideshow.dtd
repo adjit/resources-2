@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT slideshow (slide+)>
+<!ATTLIST slideshow 
+            title    CDATA    #REQUIRED
+            date     CDATA    #IMPLIED
+            author   CDATA    "unknown"
+>
+<!ELEMENT slide (slide-title?, item*)>
+<!ATTLIST slide 
+            type   (tech | exec | all) #IMPLIED
+>
+<!ENTITY % inline "#PCDATA|em|link|b|br">
+<!ELEMENT em (%inline;)*>
+<!ELEMENT link (#PCDATA|b|em)*>
+<!ATTLIST link
+            target   CDATA    #REQUIRED
+    >
+<!ELEMENT b (#PCDATA|link|em|br)*>
+<!ELEMENT br EMPTY>
+<!ELEMENT diagram (#PCDATA)>
+<!ELEMENT slide-title (%inline;)*>
+<!ELEMENT item (%inline;|list|diagram)*>
+<!ELEMENT list (item+)>
+<!ATTLIST list 
+    type        (ordered|unordered)  "ordered">
+    
+
+
